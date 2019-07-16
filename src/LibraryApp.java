@@ -83,9 +83,19 @@ public class LibraryApp {
 
 		}
 		if (bookListInfo.containsKey(titleToSearch)) {
+			if (bookListInfo.get(titleToSearch).get(1).equals("On-shelf")
+					|| bookListInfo.get(titleToSearch).get(1).equals("Interlibrary-loan")) {
+				System.out.println("Book found and it is available for pickup. Proceed to check out!");
+				changeStatus(titleToSearch, listOfBooksObjects, Status.CHECKEDOUT);
 
-			System.out.println("Book found. Proceed to check out!");
-			changeStatus(titleToSearch, listOfBooksObjects, Status.CHECKEDOUT);
+			} else if (bookListInfo.get(titleToSearch).get(1).equals("Checked-out")) {
+				System.out.println("Book is not available becuase it is checked out. Check again after 2 weeks!");
+
+			} else if (bookListInfo.get(titleToSearch).get(1).equals("Reserved")) {
+				System.out.println(
+						"Book is not available becuase it was requested as an Interlibrary-loan. Check again after 3 weeks!");
+			}
+
 		} else {
 
 			System.out.println("Sorry, book is not available ");
