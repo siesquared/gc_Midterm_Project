@@ -1,10 +1,10 @@
-Alice in Wonderland	Lewis Carollel	On-shelf
-Harry Potter	JK Rowling	On-shelf
-Chronicles of Narnia	C.S Lewis	On-shelf
-Hacker	Ted Dekker	On-shelf
-Cloud Engineering	Thomas Smith	On-shelf
-Calculus	PK Thomas	On-shelf
-Time Management Sienna Harris	On-shelf
-Learning Korean	Jacqueline Townsend	On-shelf
-The Lord of the Rings	JRR Tolkien	On-shelf
-Pro Git	Scott Chacon	On-shelf
+Alice in Wonderland,Lewis Carollel,On-shelf
+Harry Potter,JK Rowling,On-shelf
+Chronicles of Narnia,C.S Lewis,On-shelf
+Hacker,Ted Dekker,On-shelf
+Cloud Engineering,Thomas Smith,On-shelf
+Calculus,PK Thomas,On-shelf
+Time Management,Sienna Harris,On-shelf
+Learning Korean,Jacqueline,Townsend	On-shelf
+The Lord of the Rings,JRR Tolkien,On-shelf
+Pro Git,Scott Chacon,On-shelf

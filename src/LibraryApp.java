@@ -10,7 +10,7 @@ import java.util.Scanner;
 public class LibraryApp {
 	static Scanner scnr = new Scanner(System.in);
 	private static Path filePath = Paths.get("bookList.txt");
-	
+
 	public static void main(String[] args) throws IOException {
 
 		int userPick = 0;
@@ -24,16 +24,18 @@ public class LibraryApp {
 		case 1:
 			/* Checkout a book */
 			String searchBy = Validator.getString(scnr, "Would you like to search a book by author or title? (A or T)");
-			if(searchBy.equalsIgnoreCase("T")) {
+			if (searchBy.equalsIgnoreCase("T")) {
 				String titleToSearch = Validator.getString(scnr, "Enter the book title: ");
 				String searchResult = searchByTitle(titleToSearch);
 				System.out.println(searchResult);
-			}else if(searchBy.equalsIgnoreCase("A")) {
-				//searchByAuthor();
+			} else if (searchBy.equalsIgnoreCase("A")) {
+				;// searchByAuthor();
 			}
 			break;
 		case 2:
 			/* Return a book */
+			String titleToReturn = Validator.getString(scnr, "Enter the book title to return: ");
+			processReturn(titleToReturn);
 			break;
 		case 3:
 			/* Donate a book */
@@ -43,35 +45,44 @@ public class LibraryApp {
 			/* Exit */
 			break;
 		}
-		
+
 	}
+
 	public static String searchByTitle(String titleToSearch) throws IOException {
-		String searchResult =null;
+		String searchResult;
 		FileLinesHelper fileLinesHelper = new FileLinesHelper(filePath);
 		fileLinesHelper.ensureFileExists();
 		Map<String, ArrayList<String>> bookListInfo = new HashMap<>();
 		List<Book> listOfBooksObjects = FileUtil.readFile();
-		for (Book book: listOfBooksObjects) {
+		for (Book book : listOfBooksObjects) {
 			ArrayList<String> authorStatus = new ArrayList<>();
-			authorStatus.add(book.getAuthor()); 
+			authorStatus.add(book.getAuthor());
 			authorStatus.add(book.getStatus());
 			bookListInfo.put(book.getTitle(), authorStatus);
-			
-			
+
 		}
 		if (bookListInfo.containsKey(titleToSearch)) {
-			
-			System.out.println(listOfBooksObjects.get(0));
-			System.out.println("testing testing 1");
-			
+
 			searchResult = "Book found. Proceed to check out!";
-		}else {
-			System.out.println(listOfBooksObjects.get(1));
-			System.out.println("testing testing 2");
-			
-			searchResult = "Sorry book Not available because it is " ;//+ bookListInfo.get(titleToSearch).get(2);
+		} else {
+
+			searchResult = "Sorry, book is not available ";
 		}
 		return searchResult;
 	}
 
+	public static void processReturn(String titleToReturn) throws IOException {
+		FileLinesHelper fileLinesHelper = new FileLinesHelper(filePath);
+		fileLinesHelper.ensureFileExists();
+		ArrayList<String> bookListInfo = new ArrayList<>();
+		List<Book> listOfBooksObjects = FileUtil.readFile();
+		for (Book book : listOfBooksObjects) {
+			bookListInfo.add(book.getTitle());
+		}
+		if (bookListInfo.contains(titleToReturn)) {
+			System.out.println("Thanks for returning our book!");
+		} else {
+			System.out.println("Sorry, the book title can't be found in our database");
+		}
+	}
 }
