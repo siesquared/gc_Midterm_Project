@@ -5,6 +5,7 @@ Hacker,Ted Dekker,On-shelf
 Cloud Engineering,Thomas Smith,On-shelf
 Calculus,PK Thomas,On-shelf
 Time Management,Sienna Harris,On-shelf
-Learning Korean,Jacqueline,Townsend	On-shelf
+Learning Korean,JacquelineTownsend,On-shelf
 The Lord of the Rings,JRR Tolkien,On-shelf
-Pro Git,Scott Chacon,On-shelf
+Pro Git,Scott Chacon,Interlibrary-loan
+Living with yourself,Jackie Townsend,On-shelf

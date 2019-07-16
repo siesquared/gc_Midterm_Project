@@ -22,7 +22,7 @@ public class FileUtil {
 	// Modify this method as necessary to convert an item instance to a line of text
 	// in the file
 	private static String convertItemToLine(Book book) {
-		return String.format("%s\t%s", book.getTitle(), book.getAuthor());
+		return String.format("%s,%s,%s", book.getTitle(), book.getAuthor(), book.getStatus());
 	}
 
 	public static List<Book> readFile() {
