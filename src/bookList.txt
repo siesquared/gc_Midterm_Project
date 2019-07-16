@@ -4,8 +4,8 @@ Chronicles of Narnia,C.S Lewis,On-shelf
 Hacker,Ted Dekker,On-shelf
 Cloud Engineering,Thomas Smith,On-shelf
 Calculus,PK Thomas,On-shelf
-Time Management,Sienna Harris,On-shelf
-Learning Korean,JacquelineTownsend,On-shelf
+Time Management,Sienna Harris,Checked-out
+Learning Korean,JacquelineTownsend,Checked-out
 The Lord of the Rings,JRR Tolkien,On-shelf
 Pro Git,Scott Chacon,Interlibrary-loan
 Living with yourself,Jackie Townsend,On-shelf

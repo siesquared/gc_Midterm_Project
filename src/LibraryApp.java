@@ -1,6 +1,8 @@
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -85,15 +87,22 @@ public class LibraryApp {
 		if (bookListInfo.containsKey(titleToSearch)) {
 			if (bookListInfo.get(titleToSearch).get(1).equals("On-shelf")
 					|| bookListInfo.get(titleToSearch).get(1).equals("Interlibrary-loan")) {
-				System.out.println("Book found and it is available for pickup. Proceed to check out!");
+				System.out.println(titleToSearch + " found and it is available for pickup. Proceed to check out!");
+
+				LocalDate today = LocalDate.now();
+				System.out.println("Today is: " + today);
+				LocalDate next2Week = today.plus(2, ChronoUnit.WEEKS);
+				System.out.println("Return the book by: " + next2Week);
+
 				changeStatus(titleToSearch, listOfBooksObjects, Status.CHECKEDOUT);
 
 			} else if (bookListInfo.get(titleToSearch).get(1).equals("Checked-out")) {
-				System.out.println("Book is not available becuase it is checked out. Check again after 2 weeks!");
+				System.out.println(
+						titleToSearch + " is not available becuase it is checked out. Check again after 2 weeks!");
 
 			} else if (bookListInfo.get(titleToSearch).get(1).equals("Reserved")) {
-				System.out.println(
-						"Book is not available becuase it was requested as an Interlibrary-loan. Check again after 3 weeks!");
+				System.out.println(titleToSearch
+						+ " is not available becuase it was requested as an Interlibrary-loan. Check again after 3 weeks!");
 			}
 
 		} else {
