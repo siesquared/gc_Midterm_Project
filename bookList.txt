@@ -10,5 +10,5 @@ The Lord of the Rings,JRR Tolkien,On-shelf,null
 Pro Git,Scott Chacon,Interlibrary-loan,null
 Living with yourself,Jackie Townsend,On-shelf,null
 Be Happy,P. Williams,On-shelf,null
-Quiet,Susan Cain,Checked-out,2019-07-31
+Quiet,Susan Cain,On-shelf,null
 I don't Know,M. Now,On-shelf,null

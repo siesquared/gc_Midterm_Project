@@ -22,18 +22,26 @@ public class LibraryApp {
 
 		displayBooks();
 
-			System.out.println("----------------------------------------------------------------------\n");
+		System.out.println("---------------------------------------------------------------------------------------\n");
 
 		do {
 			System.out.println();
 		userPick = Validator.getInt(scnr,
-				" Main Menu \n 1.Checkout a book \n 2.Return a book \n 3.Donate a book \n 4.Exit \n");
+				" Main Menu\n1.Display List\n2.Checkout a book\n3.Return a book\n4.Donate a book\n5.Exit \n");
 
 
 
 
 		switch (userPick) {
-		case 1:
+		
+		
+		
+		case 1:/*display list */
+			  displayBooks(); 
+			  System.out.println("---------------------------------------------------------------------------------------\n");
+
+			break;
+		case 2:
 			/* Checkout a book */
 			String searchBy = Validator.getString(scnr, "Would you like to search a book by author or title? (A or T)");
 			if (searchBy.equalsIgnoreCase("T")) {
@@ -45,12 +53,12 @@ public class LibraryApp {
 				searchByAuthor(authorToSearch);
 			}
 			break;
-		case 2:
+		case 3:
 			/* Return a book */
 			String titleToReturn = Validator.getString(scnr, "Enter the book title to return: ");
 			processReturn(titleToReturn);
 			break;
-		case 3:
+		case 4:
 			/* Donate a book */
 			String titleToDonate = Validator.getString(scnr, "Enter the book title to donate: ");
 			String authorToDonate = Validator.getString(scnr, "Enter the book author to donate: ");
@@ -63,7 +71,7 @@ public class LibraryApp {
 			break;
 			}
 
-		} while (userPick != 4);
+		} while (userPick != 5);
 		scnr.hasNextLine();
 
 	}/* End of main */
@@ -72,10 +80,10 @@ public class LibraryApp {
 	public static void displayBooks() {
 		List<Book> books = new ArrayList<>();
 		books = FileUtil.readFile();
-		System.out.printf("%-27s %-26s %-15s %-15s\n", "Title", "Author", "Status", "Due Date");
-		System.out.println("================================================================================");
+		System.out.printf("%-27s %-26s %-21s %-27s\n", "Title", "Author", "Status", "Due Date");
+		System.out.println("=======================================================================================");
 		for (Book book : books) {
-			System.out.printf("%-27s %-26s %-15s", book.getTitle(), book.getAuthor(), book.getStatus());
+			System.out.printf("%-27s %-26s %-20s", book.getTitle(), book.getAuthor(), book.getStatus());
 			if (book.getDueDate() != null) {
 				DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-dd-MMMM");
 				System.out.printf("%-15s", book.getDueDate().format(formatter));
