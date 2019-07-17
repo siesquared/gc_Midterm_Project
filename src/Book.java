@@ -1,20 +1,20 @@
+import java.time.LocalDate;
 
 public class Book {
 
 	private String title;
 	private String author;
 	private String status;
-	private boolean returned = true;
+	private LocalDate dueDate;
 
 	public Book() {
-
+		this.setDueDate(null);
 	}
 
-	public Book(String title, String author, String status, boolean returned) {
+	public Book(String title, String author, String status) {
 		super();
 		this.title = title;
 		this.author = author;
-		this.returned = returned;
 		this.status = status;
 	}
 
@@ -26,14 +26,6 @@ public class Book {
 		this.title = title;
 	}
 
-	public void setStatus(String status) {
-		this.status = status;
-	}
-
-	public String getStatus() {
-		return status;
-	}
-
 	public String getAuthor() {
 		return author;
 	}
@@ -42,17 +34,31 @@ public class Book {
 		this.author = author;
 	}
 
-	public boolean isReturned() {
-		return returned;
+	public String getStatus() {
+		return status;
 	}
 
-	public void setReturned(boolean returned) {
-		this.returned = returned;
+	public void setStatus(String status) {
+		this.status = status;
 	}
 
 	@Override
 	public String toString() {
 		return "Books [title=" + title + ", author=" + author + ", status= " + status + "]";
+	}
+
+	/**
+	 * @return the dueDate
+	 */
+	public LocalDate getDueDate() {
+		return dueDate;
+	}
+
+	/**
+	 * @param dueDate the dueDate to set
+	 */
+	public void setDueDate(LocalDate dueDate) {
+		this.dueDate = dueDate;
 	}
 
 }

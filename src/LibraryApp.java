@@ -2,6 +2,7 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -62,10 +63,14 @@ public class LibraryApp {
 	public static void displayBooks() {
 		List<Book> books = new ArrayList<>();
 		books = FileUtil.readFile();
-		System.out.printf("%-27s %-26s %-15s\n", "Title", "Author", "Status");
-		System.out.println("================================================================");
+		System.out.printf("%-27s %-26s %-15s %-15s\n", "Title", "Author", "Status", "Due Date");
+		System.out.println("================================================================================");
 		for (Book book : books) {
 			System.out.printf("%-27s %-26s %-15s", book.getTitle(), book.getAuthor(), book.getStatus());
+			if (book.getDueDate() != null) {
+				DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-dd-MMMM");
+				System.out.printf("%-15s", book.getDueDate().format(formatter));
+			}
 			System.out.println("");
 		}
 	}
@@ -89,11 +94,7 @@ public class LibraryApp {
 					|| bookListInfo.get(titleToSearch).get(1).equals("Interlibrary-loan")) {
 				System.out.println(titleToSearch + " found and it is available for pickup. Proceed to check out!");
 
-				LocalDate today = LocalDate.now();
-				System.out.println("Today is: " + today);
-				LocalDate next2Week = today.plus(2, ChronoUnit.WEEKS);
-				System.out.println("Return the book by: " + next2Week);
-
+				setADueDate(titleToSearch, listOfBooksObjects, false);
 				changeStatus(titleToSearch, listOfBooksObjects, Status.CHECKEDOUT);
 
 			} else if (bookListInfo.get(titleToSearch).get(1).equals("Checked-out")) {
@@ -126,7 +127,7 @@ public class LibraryApp {
 
 		}
 		if (bookListInfo.containsKey(authorToSearch)) {
-
+			setADueDate(authorToSearch, listOfBooksObjects, true);
 			System.out.println("Book by " + authorToSearch + " found. Proceed to check out!");
 			changeStatus(authorToSearch, listOfBooksObjects, Status.CHECKEDOUT);
 		} else {
@@ -149,6 +150,7 @@ public class LibraryApp {
 		}
 		if (bookListInfo.containsKey(titleToReturn)) {
 			System.out.println("Thanks for returning our book!");
+			resetADueDate(titleToReturn, listOfBooksObjects);
 			if (bookListInfo.get(titleToReturn).get(1).equals("Reserved")) {
 				changeStatus(titleToReturn, listOfBooksObjects, Status.INTERLIBRARY);
 			} else {
@@ -201,4 +203,38 @@ public class LibraryApp {
 		FileUtil.appendToFile(donatedBook);
 		System.out.println("Thanks for donating a book!");
 	}
+
+	public static void setADueDate(String keyToSearch, List<Book> listOfBooksObjects, boolean author)
+			throws IOException {
+		LocalDate today = LocalDate.now();
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-dd-MMMM");
+		System.out.println("Today is: " + today.format(formatter));
+
+		LocalDate next2Week = today.plus(2, ChronoUnit.WEEKS);
+		System.out.println("Return the book by: " + next2Week);
+		if (!author) {
+			for (Book book : listOfBooksObjects) {
+				if (book.getTitle().equals(keyToSearch)) {
+					book.setDueDate(next2Week);
+				}
+			}
+		} else if (author) {
+			for (Book book : listOfBooksObjects) {
+				if (book.getAuthor().equals(keyToSearch)) {
+					book.setDueDate(next2Week);
+				}
+			}
+			// FileUtil.rewriteFile(listOfBooksObjects); /* write back after setting the due
+			// date */
+		}
+	}
+
+	public static void resetADueDate(String titleToReturn, List<Book> listOfBooksObjects) {
+		for (Book book : listOfBooksObjects) {
+			if (book.getTitle().equals(titleToReturn)) {
+				book.setDueDate(null);
+			}
+		}
+	}
+
 }

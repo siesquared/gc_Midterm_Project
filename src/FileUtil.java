@@ -1,4 +1,5 @@
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,18 +12,21 @@ public class FileUtil {
 	// new item instance
 	private static Book convertLineToItem(String line) {
 		String[] parts = line.split(",");
+		// DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-dd-MMMM");
 		Book book = new Book();
 		book.setTitle(parts[0]);
 		book.setAuthor(parts[1]);
 		book.setStatus(parts[2]);
-		// book.setDueDate(Integer.parseInt(parts[1]));
+		if (parts.length == 4 && !parts[3].equals("null")) {
+			book.setDueDate(LocalDate.parse(parts[3]));
+		}
 		return book;
 	}
 
 	// Modify this method as necessary to convert an item instance to a line of text
 	// in the file
 	private static String convertItemToLine(Book book) {
-		return String.format("%s,%s,%s", book.getTitle(), book.getAuthor(), book.getStatus());
+		return String.format("%s,%s,%s,%s", book.getTitle(), book.getAuthor(), book.getStatus(), book.getDueDate());
 	}
 
 	public static List<Book> readFile() {

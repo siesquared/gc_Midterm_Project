@@ -1,11 +1,13 @@
-Alice in Wonderland,Lewis Carollel,On-shelf
-Harry Potter,JK Rowling,On-shelf
-Chronicles of Narnia,C.S Lewis,On-shelf
-Hacker,Ted Dekker,On-shelf
-Cloud Engineering,Thomas Smith,On-shelf
-Calculus,PK Thomas,On-shelf
-Time Management,Sienna Harris,Checked-out
-Learning Korean,JacquelineTownsend,Checked-out
-The Lord of the Rings,JRR Tolkien,On-shelf
-Pro Git,Scott Chacon,Interlibrary-loan
-Living with yourself,Jackie Townsend,On-shelf
+Alice in Wonderland,Lewis Carollel,Checked-out,2019-07-31
+Harry Potter,JK Rowling,On-shelf,null
+Chronicles of Narnia,C.S Lewis,On-shelf,null
+Hacker,Ted Dekker,On-shelf,null
+Cloud Engineering,Thomas Smith,On-shelf,null
+Calculus,PK Thomas,On-shelf,null
+Time Management,Sienna Harris,On-shelf,null
+Learning Korean,JacquelineTownsend,Checked-out,2019-07-31
+The Lord of the Rings,JRR Tolkien,On-shelf,null
+Pro Git,Scott Chacon,Interlibrary-loan,null
+Living with yourself,Jackie Townsend,On-shelf,null
+Be Happy,P. Williams,On-shelf,null
+Quiet ,Susan Cain,On-shelf,null
