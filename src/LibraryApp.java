@@ -17,14 +17,20 @@ public class LibraryApp {
 	public static void main(String[] args) throws IOException {
 
 		int userPick = 0;
-		System.out.println("Welcome to GroupOne's Libaray!\n");
+
+		System.out.println("Welcome to the JSB Libaray!\n");
 
 		displayBooks();
 
-		System.out.println("-----------------------------------------------------\n");
+			System.out.println("----------------------------------------------------------------------\n");
 
+		do {
+			System.out.println();
 		userPick = Validator.getInt(scnr,
 				" Main Menu \n 1.Checkout a book \n 2.Return a book \n 3.Donate a book \n 4.Exit \n");
+
+
+
 
 		switch (userPick) {
 		case 1:
@@ -53,9 +59,12 @@ public class LibraryApp {
 
 		default:
 			/* Exit */
-			System.out.println("Thank you for using GroupOne's Libaray! ");
+				System.out.println("Thank you for using the JSB Libaray! ");
 			break;
-		}
+			}
+
+		} while (userPick != 4);
+		scnr.hasNextLine();
 
 	}/* End of main */
 
