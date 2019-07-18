@@ -1,5 +1,5 @@
 Alice in Wonderland,Lewis Carollel,On-shelf,null
-Harry Potter,JK Rowling,On-shelf,null
+Harry Potter,JK Rowling,Checked-out,2019-07-31
 Chronicles of Narnia,C.S Lewis,On-shelf,null
 Hacker,Ted Dekker,On-shelf,null
 Cloud Engineering,Thomas Smith,On-shelf,null
@@ -8,7 +8,7 @@ Time Management,Sienna Harris,On-shelf,null
 Learning Korean,JacquelineTownsend,On-shelf,null
 The Lord of the Rings,JRR Tolkien,On-shelf,null
 Pro Git,Scott Chacon,Interlibrary-loan,null
-Living with yourself,Jackie Townsend,On-shelf,null
+Living with yourself,Jackie Townsend,Checked-out,2019-07-31
 Be Happy,P. Williams,On-shelf,null
 Quiet,Susan Cain,On-shelf,null
 I don't Know,M. Now,On-shelf,null

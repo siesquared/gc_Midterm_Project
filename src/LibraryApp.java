@@ -14,7 +14,7 @@ public class LibraryApp {
 	static Scanner scnr = new Scanner(System.in);
 	private static Path filePath = Paths.get("bookList.txt");
 
-	public static void main(String[] args) throws IOException {
+	public static void main(String[] args) throws IOException {// open main
 
 		int userPick = 0;
 
@@ -26,6 +26,7 @@ public class LibraryApp {
 
 		do {
 			System.out.println();
+			//print menu
 		userPick = Validator.getInt(scnr,
 				" Main Menu\n1.Display List\n2.Checkout a book\n3.Return a book\n4.Donate a book\n5.Exit \n");
 
@@ -44,6 +45,7 @@ public class LibraryApp {
 		case 2:
 			/* Checkout a book */
 			String searchBy = Validator.getString(scnr, "Would you like to search a book by author or title? (A or T)");
+			//search by Title
 			if (searchBy.equalsIgnoreCase("T")) {
 				String titleToSearch = Validator.getString(scnr, "Enter the book title: ");
 				searchByTitle(titleToSearch);
@@ -72,12 +74,12 @@ public class LibraryApp {
 			}
 
 		} while (userPick != 5);
-		scnr.hasNextLine();
+		scnr.nextLine();
 
 	}/* End of main */
 
 	/*------------------------------------*/
-	public static void displayBooks() {
+	public static void displayBooks() {// method to display book list form bookList.txt
 		List<Book> books = new ArrayList<>();
 		books = FileUtil.readFile();
 		System.out.printf("%-27s %-26s %-21s %-27s\n", "Title", "Author", "Status", "Due Date");
@@ -93,7 +95,7 @@ public class LibraryApp {
 	}
 
 	/*------------------------------------*/
-	public static void searchByTitle(String titleToSearch) throws IOException {
+	public static void searchByTitle(String titleToSearch) throws IOException {// method to search book list by title
 
 		FileLinesHelper fileLinesHelper = new FileLinesHelper(filePath);
 		fileLinesHelper.ensureFileExists();
@@ -111,14 +113,14 @@ public class LibraryApp {
 					|| bookListInfo.get(titleToSearch).get(1).equals("Interlibrary-loan")) {
 				System.out.println(titleToSearch + " found and it is available for pickup. Proceed to check out!");
 
-				setADueDate(titleToSearch, listOfBooksObjects, false);
-				changeStatus(titleToSearch, listOfBooksObjects, Status.CHECKEDOUT);
+				setADueDate(titleToSearch, listOfBooksObjects, false);//sets return date for book taken
+				changeStatus(titleToSearch, listOfBooksObjects, Status.CHECKEDOUT);//changes status of book to checked out
 
 			} else if (bookListInfo.get(titleToSearch).get(1).equals("Checked-out")) {
 				System.out.println(
 						titleToSearch + " is not available becuase it is checked out. Check again after 2 weeks!");
 
-			} else if (bookListInfo.get(titleToSearch).get(1).equals("Reserved")) {
+			} else if (bookListInfo.get(titleToSearch).get(1).equals("Reserved")) {// Status for checked out Inter Library loans only 
 				System.out.println(titleToSearch
 						+ " is not available becuase it was requested as an Interlibrary-loan. Check again after 3 weeks!");
 			}
@@ -130,7 +132,7 @@ public class LibraryApp {
 	}
 
 	/*------------------------------------*/
-	public static void searchByAuthor(String authorToSearch) throws IOException {
+	public static void searchByAuthor(String authorToSearch) throws IOException {// method to search book list by author
 
 		FileLinesHelper fileLinesHelper = new FileLinesHelper(filePath);
 		fileLinesHelper.ensureFileExists();
@@ -181,7 +183,7 @@ public class LibraryApp {
 	}
 
 	/*------------------------------------*/
-	public static void changeStatus(String keyToSearch, List<Book> listOfBooksObjects, Status status)
+	public static void changeStatus(String keyToSearch, List<Book> listOfBooksObjects, Status status)// method for status change 
 			throws IOException {
 
 		FileLinesHelper fileLinesHelper = new FileLinesHelper(filePath);
@@ -191,7 +193,7 @@ public class LibraryApp {
 			if (book.getTitle().equals(keyToSearch)) {
 				if (book.getStatus().equals("Interlibrary-loan")) {
 					System.out.println(
-							"It is a Interlibrary-loan. We will contact you when the book is readyfor pickup!");
+							"It is a Interlibrary-loan. We will contact you when the book is ready for pickup!");
 					book.setStatus(Status.RESERVED.toString());
 				} else {
 					book.setStatus(status.toString());
@@ -199,18 +201,18 @@ public class LibraryApp {
 			} else if (book.getAuthor().equals(keyToSearch)) {
 				if (book.getStatus().equals("Interlibrary-loan")) {
 					System.out.println(
-							"It is a Interlibrary-loan. We will contact you when the book is readyfor pickup!");
+							"This is a Interlibrary-loan. We will contact you when the book is ready for pickup!");
 					book.setStatus(Status.RESERVED.toString());
 				} else {
 					book.setStatus(status.toString());
 				}
 			}
 		}
-		FileUtil.rewriteFile(listOfBooksObjects); /* after changing status */
+		FileUtil.rewriteFile(listOfBooksObjects); /* makes changes to book list  after changing status */
 	}
 
 	/*------------------------------------*/
-	public static void processDonatedBook(String titleToDonate, String authorToDonate) throws IOException {
+	public static void processDonatedBook(String titleToDonate, String authorToDonate) throws IOException {// method to append user added book to list 
 		FileLinesHelper fileLinesHelper = new FileLinesHelper(filePath);
 		fileLinesHelper.ensureFileExists();
 		Book donatedBook = new Book();
